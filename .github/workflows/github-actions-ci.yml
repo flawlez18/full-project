@@ -1,12 +1,12 @@
 name: Node js app deploy to EKS
 on:
-  push:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  release:
-    types: [created]
-  workflow_dispatch: # Put here!!
+  # release:
+  #   types: [created]
+  # workflow_dispatch: # Put here!!
 
 jobs:
   build_test:
@@ -14,19 +14,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 14, 16, 18 ]
+        node: [18]
 
     name: Node ${{ matrix.node }} sample
     steps:
-      - uses: actions/checkout@v3
-      - name: Run linting rules and tests
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test
-      
+    - uses: actions/checkout@v3
+    - name: Prettify code
+      uses: creyD/prettier_action@v4.3
+      with:
+        # This part is also where you can pass other options, for example:
+        prettier_options: --write **/*.{js,md}
+    - name: Run linting rules and tests
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
+    - run: npm ci
+    - run: npm run lint
+    - run: npm run test
+
+
   deploy:
     runs-on: ubuntu-latest
     steps:

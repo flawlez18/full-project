@@ -1,18 +1,21 @@
 FROM node:14-alpine 
-#FROM node:18.16.0-alpine3.17
+
 # Create app directory
 WORKDIR /usr/src/app 
 
-#COPY . /usr/src/app/.
+# Copy application code to the container
 COPY . .
 
+# Install app dependencies
 RUN npm install 
 
+# Expose port 8080
 EXPOSE 8080
 
-#COPY rdicidr-0.1.0/src/ .
-COPY . . 
+#Copy public and src directories to container to /app directory in container
+COPY rdicidr-0.1.0/public /usr/src/app/public
+#Copy src directory to /src directory in container
+COPY rdicidr-0.1.0/src/ /usr/src/app/src
 
-
-CMD [ "node", "ipv4.js" ]
-#CMD ["npm", "start"]
+#start the application
+CMD ["npm", "start"]
