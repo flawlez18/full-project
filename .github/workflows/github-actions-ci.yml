@@ -7,7 +7,7 @@ on:
   # release:
   #   types: [created]
   # workflow_dispatch:
-
+   
 jobs:
   build_test:
     # The type of runner that the job will run on
@@ -40,6 +40,7 @@ jobs:
     - run: npm run lint
     - run: npm run test
 
+    
   deploy:
     runs-on: ubuntu-latest
     steps:

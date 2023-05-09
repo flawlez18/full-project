@@ -9,8 +9,8 @@ COPY . .
 # Install app dependencies
 RUN npm install 
 
-# Expose port 8080
-EXPOSE 8080
+# Expose port 3000
+EXPOSE 3000
 
 #Copy public and src directories to container to /app directory in container
 COPY rdicidr-0.1.0/public /usr/src/app/public
