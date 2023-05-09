@@ -40,6 +40,10 @@ jobs:
     - run: npm run lint
     - run: npm run test
 
+    #- run: npm ci
+    - run: npm run lint
+    - run: npm run test
+
   deploy:
     runs-on: ubuntu-latest
     steps:
